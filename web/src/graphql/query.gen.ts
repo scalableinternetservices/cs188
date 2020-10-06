@@ -24,6 +24,60 @@ export interface FetchUserContext {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: FetchCandies
+// ====================================================
+
+export interface FetchCandies_candies_user {
+  __typename: "User";
+  id: number;
+  name: string;
+  email: string;
+  userType: UserType;
+}
+
+export interface FetchCandies_candies {
+  __typename: "UserCandy";
+  candyCount: number;
+  user: FetchCandies_candies_user;
+}
+
+export interface FetchCandies {
+  candies: FetchCandies_candies[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL subscription operation: CandySubscription
+// ====================================================
+
+export interface CandySubscription_candyUpdates_user {
+  __typename: "User";
+  id: number;
+  name: string;
+  email: string;
+  userType: UserType;
+}
+
+export interface CandySubscription_candyUpdates {
+  __typename: "UserCandy";
+  candyCount: number;
+  user: CandySubscription_candyUpdates_user;
+}
+
+export interface CandySubscription {
+  candyUpdates: CandySubscription_candyUpdates | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: FetchSurveys
 // ====================================================
 
@@ -137,6 +191,23 @@ export interface FetchSurveyVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: ThrowCandy
+// ====================================================
+
+export interface ThrowCandy {
+  throwCandy: boolean;
+}
+
+export interface ThrowCandyVariables {
+  email: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: AnswerSurveyQuestion
 // ====================================================
 
@@ -185,6 +256,46 @@ export interface NextSurveyQuestion {
 
 export interface NextSurveyQuestionVariables {
   surveyId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: User
+// ====================================================
+
+export interface User {
+  __typename: "User";
+  id: number;
+  name: string;
+  email: string;
+  userType: UserType;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: UserCandy
+// ====================================================
+
+export interface UserCandy_user {
+  __typename: "User";
+  id: number;
+  name: string;
+  email: string;
+  userType: UserType;
+}
+
+export interface UserCandy {
+  __typename: "UserCandy";
+  candyCount: number;
+  user: UserCandy_user;
 }
 
 /* tslint:disable */

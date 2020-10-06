@@ -2,6 +2,7 @@ import { RouteComponentProps } from '@reach/router'
 import * as React from 'react'
 import { Login } from '../auth/Login'
 import { AppRouteParams, PlaygroundApp } from '../nav/route'
+import { Candy } from '../playground/Candy'
 import { Surveys } from '../playground/Surveys'
 import { Page } from './Page'
 
@@ -16,6 +17,8 @@ function getPlaygroundApp(app?: PlaygroundApp) {
     return <div>choose an app</div>
   }
   switch (app) {
+    case PlaygroundApp.CANDY:
+      return <Candy />
     case PlaygroundApp.SURVEYS:
       return <Surveys />
     case PlaygroundApp.LOGIN:
