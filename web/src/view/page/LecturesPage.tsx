@@ -30,8 +30,8 @@ export function LecturesPage(props: LecturesPageProps) {
             <Lecture
               day="Tue Oct 6"
               title="HTTP, HTML, CSS"
-              href="#"
-              description="HTTP protocol in depth. Demo: building on the web with HTML and CSS."
+              href="/app/assets/lectures/CS188_10_6_20.pdf"
+              description="HTTP protocol in depth. Demo: Chrome dev tools, course website under the hood."
               requiredReading={[
                 {
                   title: 'High Performance Browser Networking, chapter 1',
@@ -44,16 +44,26 @@ export function LecturesPage(props: LecturesPageProps) {
               ]}
             />
             <Lecture
-              day="Thu Oct 8"
-              title="Shipping software in real life"
-              href="#"
-              description="Working with other people & shipping like a pro. Demo: `git` and CI/CD."
-            />
-            <Lecture
-              day="Tue Oct 13"
+              day="Tue Oct 8"
               title="Application server architecture"
               href="#"
               description="Building an efficient appserver. Demo: survey of appservers."
+              requiredReading={[
+                {
+                  title: 'TS Deep Dive, JavaScript (** read up to and including "Truthy")',
+                  href: 'https://basarat.gitbook.io/typescript/recap',
+                },
+                {
+                  title: 'TS Deep Dive, Future JavaScript Now (** read up to and including "Async Await")',
+                  href: 'https://basarat.gitbook.io/typescript/future-javascript',
+                },
+              ]}
+            />
+            <Lecture
+              day="Thu Oct 13"
+              title="Shipping software in real life"
+              href="#"
+              description="Working with other people & shipping like a pro. Demo: `git` and CI/CD."
             />
             <Lecture
               day="Thu Oct 15"
