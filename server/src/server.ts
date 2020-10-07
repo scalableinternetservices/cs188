@@ -25,13 +25,7 @@ import { User } from './entities/User'
 import { getSchema, graphqlRoot, pubsub } from './graphql/api'
 import { ConnectionManager } from './graphql/ConnectionManager'
 import { expressLambdaProxy } from './lambda/handler'
-import { setBrowser } from './lambda/puppet'
 import { renderApp } from './render'
-
-setBrowser(() => {
-  const puppeteer = require('puppeteer')
-  return puppeteer.launch()
-})
 
 const server = new GraphQLServer({
   typeDefs: getSchema(),
@@ -228,19 +222,21 @@ server.express.post(
   })
 )
 
-initORM()
-  .then(() => migrate())
-  .then(() =>
-    server.start(
-      {
-        port: Config.appserverPort,
-        endpoint: '/graphql',
-        subscriptions: '/graphqlsubscription',
-        playground: '/graphql',
-      },
-      () => {
-        console.log(`server started on http://localhost:${Config.appserverPort}/`)
-      }
+export function initServer() {
+  return initORM()
+    .then(() => migrate())
+    .then(() =>
+      server.start(
+        {
+          port: Config.appserverPort,
+          endpoint: '/graphql',
+          subscriptions: '/graphqlsubscription',
+          playground: '/graphql',
+        },
+        () => {
+          console.log(`server started on http://localhost:${Config.appserverPort}/`)
+        }
+      )
     )
-  )
-  .catch(err => console.error(err))
+    .catch(err => console.error(err))
+}

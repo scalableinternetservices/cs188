@@ -42,7 +42,20 @@ Clone and initialize the starter project. You'll need to have `node` and `npm` i
 source <(curl -s https://cs188.cloudcity.computer/app/script/init-project.sh)
 ```
 
-This will create a directory with the name of your project slug and install the project dependencies. Open the project directory in VS Code. Install the recommended extensions then reload VS Code.
+This will create a directory with the name of your project slug and install the project dependencies.
+
+If you run into an error sourcing the init script above, you may run the steps manually:
+
+```
+git clone https://github.com/rothfels/bespin.git <your project slug>
+cd <your project slug>
+rm -rf .git
+<find/replace "bespin" with your project slug>
+git init
+npm install
+```
+
+Open the project directory in VS Code. Install the recommended extensions then reload VS Code.
 
 ### Run a local development server
 
@@ -59,14 +72,14 @@ docker-compose up -d
 You must compile TypeScript before it is runnable in a browser. Start a "watch" mode process that compiles your TypeScript as soon as you change it.
 
 ```
-npm run watch
+npm run watch:web
 ```
 
 #### Run `server.ts`
 
-Open the `Run/Debug` tab in VS Code and choose the `server.ts` run configuration, then hit play.
+Open the `Run/Debug` tab in VS Code and choose the `server.ts` run configuration (either works; one will auto-restart your server when you edit code), then hit play.
 
-![image](https://user-images.githubusercontent.com/1095573/93257426-acb24f80-f751-11ea-8df2-7768ecab3aa5.png)
+![image](https://user-images.githubusercontent.com/1095573/94950349-5c4c2900-0497-11eb-8aca-a5e5048be039.png)
 
 Open http://localhost:3000 to see your app.
 
@@ -74,15 +87,28 @@ Open http://localhost:3000/graphql to see your interactive GraphQL API explorer.
 
 Open `Debug Console` in VS Code to see console output.
 
-![image](https://user-images.githubusercontent.com/1095573/93257501-cc497800-f751-11ea-9dc3-c12beee3c56f.png)
+![image](https://user-images.githubusercontent.com/1095573/94950447-81d93280-0497-11eb-82c5-ae3e374fd2c5.png)
 
 Set breakpoints in the gutter to the left of your code. **Note: these only work on code executing on the server, not in the browser.**
 
 ![image](https://user-images.githubusercontent.com/1095573/93257545-dcf9ee00-f751-11ea-9a7a-1f103a3d3c5a.png)
 
+
+#### Run React Storybook
+
+The fastest way to develop React components is in an isolated environment using [Storybook](https://storybook.js.org/). The project ships with an example storybook, see `Login.stories.tsx` or `Survey.stories.tsx`.
+
+```
+npm run storybook:web
+```
+
+Then, go to http://localhost:6006 to see your stories. Any changes you make to code will automatically refresh the browser.
+
+If you are rendering React components that require a backend (e.g. because the component makes GraphQL API requests) then you should also run `server.ts` in VS Code before running storybook. It is recommended to use the `server.ts (no restart)` run configuration.
+
 ## Project Structure & HOWTOs
 
-- `web`: runs code in the browser (React application). In production, this code is "bundled" into a single `bundle.js` file and served by te backend. It is sourced by the HTML served at `/app`.
+- `web`: runs code in the browser (React application). In production, this code is "bundled" into a single `bundle.js` file and served by the backend. It is sourced by the HTML served at `/app`.
 - `server`: runs code on Node.js (Express server, GraphQL API). In production, this code may run in ECS or on AWS Lambda, depending on how you deploy it. Serves:
   - `/app`: React (client & server rendered) application, static assets
   - `/graphql`: GraphQL API
@@ -90,17 +116,15 @@ Set breakpoints in the gutter to the left of your code. **Note: these only work 
   - `/api/:function`: non-graphql/REST APIs (e.g. RPCs)
 - `common`: code that may be imported by either `web` or `server` projects. Must be runnable in both server and browser contexts.
 - `public`: static assets bundled with the server and served at `/app`. Destination directory for build assets (e.g. `bundle.js`).
+- `stories`: React components for [Storybook](https://storybook.js.org/)
 
 ### Database models & migrations
 
 The project ships with an ORM and a migration manager. You may use the ORM or write raw SQL statements or both.
 
-Define your ORM models in `server/src/db/models`. Tables will automatically get created. See [sequelize-typescript](https://github.com/RobinBuschmann/sequelize-typescript#readme) for details.
+Define your ORM models in `server/src/entities`. Tables will automatically get created. See [TypeORM docs](https://typeorm.io/#/) for details.
 
 Define migrations in `server/src/db/migrations`. They will automatically get run before your server starts. The starter project ships with an initial migration. Add new migrations by checking in additional migration files using the naming convention `VX.X__Description.sql`. The server only runs migrations which haven't already been run successfully. The server will fail before accepting connections if any migrations fail. You must manually correct the failed migrations to get the server into a healthy state.
-
-TODO(rothfels): add DB troubleshooting docs
-
 
 ## Deploy your app to AWS
 
@@ -206,18 +230,15 @@ Then provision it with `terraform apply`. You should also modify your `deploy-lo
 
 ## Load testing
 
-The project includes a load test runner which you may run from the `scratchpad.ts` launch configuration:
+The project includes a load test runner which you may run from the `loadtest.ts` launch configuration:
 
-![image](https://user-images.githubusercontent.com/1095573/93257625-fd29ad00-f751-11ea-839b-ac4f16ab602b.png)
+![image](https://user-images.githubusercontent.com/1095573/94951019-67538900-0498-11eb-9d6e-f6f3f300f56d.png)
 
 A load test is a sequence of `ArrivalPhase`s, each consisting of period of time when some # of users/second run a `UserScript`. A user script is a TypeScript function you write which simulates real user behavior.
 
 The default script in `loadtest.ts` makes 3 GET requests to your appserver. Because your app is server rendered, your server will make GraphQL requests to itself to fetch the data necessary to render your app.
 
-You may modify the script in `loadtest.ts` to:
-
-- make arbitrary GET or POST (e.g. GraphQL) requests to any endpoint of your server, using the `fetch` interface or `apolloClient`
-- (WIP) trigger a lambda invocation which loads your app in a headless Chrome instance
+You may modify the script in `loadtest.ts` to make arbitrary GET or POST (e.g. GraphQL) requests to any endpoint of your server, using the `fetch` interface or `apolloClient`.
 
 ### Local execution vs. distributed execution
 
