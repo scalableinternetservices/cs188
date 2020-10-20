@@ -11,6 +11,7 @@ import { Page } from './Page'
 
 interface ProjectsPageProps extends RouteComponentProps, AppRouteParams {}
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function ProjectsPage(props: ProjectsPageProps) {
   return (
     <Page>
@@ -92,8 +93,9 @@ function ProjectIdeas() {
             <Link href="https://sunlightfoundation.com/our-work/">Sunlight Foundation</Link> for ideas.
           </li>
           <li>
-            Build something around public APIs. For example, the <Link href="">New York Times Developer API</Link> has
-            APIs covering geography, movie reviews, and more.
+            Build something around public APIs. For example, the{' '}
+            <Link href="https://developer.nytimes.com/">New York Times Developer API</Link> has APIs covering geography,
+            movie reviews, and more.
           </li>
           <li>
             <i>{'<your idea here>'}</i>
@@ -118,6 +120,7 @@ function SprintSchedule() {
           <Sprint
             day="Fri Oct 2"
             title="Setup dev environment"
+            href="https://docs.google.com/document/d/12isxPg-dxCgTa77nkj9t-TN1HlDELdAF4UlLEXIf5bo/edit?usp=sharing"
             checklistFull={[
               {
                 name: 'follow Quickstart section until you have a running dev server',
@@ -140,13 +143,48 @@ function SprintSchedule() {
           <Sprint
             day="Fri Oct 9"
             title="Plan project"
-            checklist={[
-              'find project team',
-              'choose project and get approved by professor and TA',
-              'start writing stories for your project in GitHub issues',
+            href="https://docs.google.com/document/d/1pfmcYeQUrjhExrIvhix1nujUVdzFHoaAUlhVCNp9v-w/edit?usp=sharing"
+            checklistFull={[
+              {
+                name: "create a free GitHub account if you don't have one",
+                href: 'https://github.com/join',
+              },
+              {
+                name: 'meet with your group and decide what you want to build this quarter',
+              },
+              {
+                name: 'plan a few features with your group (no coding)',
+              },
+              {
+                name: 'present your project plan to John/TAs and get approval',
+              },
+              {
+                name: 'give John/TAs your project name/slug',
+              },
+              {
+                name: 'join the scalableinternetservices GitHub org',
+                href: 'https://github.com/orgs/scalableinternetservices',
+              },
+              {
+                name: 'have one team member follow the project Quickstart and push your initialized project to GitHub',
+                href: 'https://github.com/rothfels/bespin#quickstart',
+              },
+              {
+                name: 'list all project group members in your README and provide an image with each of your faces :)',
+              },
             ]}
           />
-          <Sprint day="Fri Oct 16" title="Write features" checklist={['implement user stories']} />
+          <Sprint
+            day="Fri Oct 16"
+            title="Write features"
+            href="https://docs.google.com/document/d/18IjeGIWeoSl-jmChdWBNLeaQwQ2Wl9BFcMHnkCIvTE4/edit?usp=sharing"
+            checklist={[
+              'plan out features with your teammates',
+              'work with teammates to learn the starter code: try adding a database model, GraphQL API/query, React component, etc.',
+              'modify the starter code and start implement your features',
+              'commit and push code to GitHub',
+            ]}
+          />
           <Sprint day="Fri Oct 23" title="Write features" checklist={['implement user stories']} />
           <Sprint
             day="Fri Oct 30"
@@ -192,7 +230,13 @@ interface ChecklistItem {
   href?: string
 }
 
-function Sprint(props: { day: string; title: string; checklist?: string[]; checklistFull?: ChecklistItem[] }) {
+function Sprint(props: {
+  day: string
+  href?: string
+  title: string
+  checklist?: string[]
+  checklistFull?: ChecklistItem[]
+}) {
   return (
     <TR>
       <TD style={{ textAlign: 'center' }}>
@@ -200,7 +244,7 @@ function Sprint(props: { day: string; title: string; checklist?: string[]; check
       </TD>
       <TD>
         <BodyText>
-          <b>{props.title}</b>
+          <b>{props.href ? <Link href={props.href}>{props.title}</Link> : props.title}</b>
           {props.checklist && (
             <>
               <Spacer $h3 />

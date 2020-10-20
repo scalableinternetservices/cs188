@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client'
 import { getApolloClient } from '../../graphql/apolloClient'
+import { ThrowCandy, ThrowCandyVariables } from '../../graphql/query.gen'
 
 const throwCandyMutation = gql`
   mutation ThrowCandy($email: String!) {
@@ -8,7 +9,7 @@ const throwCandyMutation = gql`
 `
 
 export function throwCandy(email: string) {
-  return getApolloClient().mutate<any, any>({
+  return getApolloClient().mutate<ThrowCandy, ThrowCandyVariables>({
     mutation: throwCandyMutation,
     variables: { email },
   })

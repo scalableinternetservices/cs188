@@ -1,4 +1,5 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
+import 'cross-fetch/polyfill' // enables fetch in node
 import { answerSurveyQuestion } from '../../../web/src/view/playground/mutateSurveys'
 
 /**

@@ -9,7 +9,7 @@ function summarizeError(errs: readonly GraphQLError[]): string {
   return errs.map(err => err.message).join(', ')
 }
 
-export function handleError(err: ApolloError): any {
+export function handleError(err: ApolloError): void {
   const { message, graphQLErrors, networkError, extraInfo } = err
   console.error({ message, graphQLErrors, networkError, extraInfo })
   const errMsg = summarizeError(graphQLErrors) || message

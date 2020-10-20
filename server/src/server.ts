@@ -51,6 +51,14 @@ server.express.get('/app/*', (req, res) => {
   renderApp(req, res)
 })
 
+server.express.get(
+  '/users',
+  asyncRoute(async (req, res) => {
+    const users = await User.find()
+    res.status(200).type('json').send(users)
+  })
+)
+
 server.express.post(
   '/auth/login',
   asyncRoute(async (req, res) => {
@@ -215,28 +223,54 @@ server.express.post(
     if (authToken) {
       const session = await Session.findOne({ where: { authToken }, relations: ['user'] })
       if (session) {
-        ;(req as any).user = session.user
+        const reqAny = req as any
+        reqAny.user = session.user
       }
     }
     next()
   })
 )
 
-export function initServer() {
-  return initORM()
-    .then(() => migrate())
-    .then(() =>
-      server.start(
-        {
-          port: Config.appserverPort,
-          endpoint: '/graphql',
-          subscriptions: '/graphqlsubscription',
-          playground: '/graphql',
-        },
-        () => {
-          console.log(`server started on http://localhost:${Config.appserverPort}/`)
-        }
-      )
+initORM()
+  .then(() => migrate())
+  .then(() =>
+    server.start(
+      {
+        port: Config.appserverPort,
+        endpoint: '/graphql',
+        subscriptions: '/graphqlsubscription',
+        playground: '/graphql',
+      },
+      () => {
+        console.log(`server started on http://localhost:${Config.appserverPort}/`)
+      }
     )
-    .catch(err => console.error(err))
-}
+  )
+  .catch(err => console.error(err))
+
+// server.express.get(
+//   '/users',
+//   asyncRoute(async (req, res) => {
+//     const users = await User.find()
+//     res.status(200).type('json').send(users)
+//   })
+// )
+
+// server.express.post(
+//   '/throwCandy',
+//   asyncRoute(async (req, res) => {
+//     const email = req.params['email']
+//     const candy = await getRepository(UserCandy)
+//       .createQueryBuilder('candy')
+//       .leftJoinAndSelect('candy.user', 'user')
+//       .where('user.email = :email', { email })
+//       .getOne()
+//     if (!candy) {
+//       return res.status(200).send(false)
+//     }
+//     // give a random amount of candy
+//     candy.candyCount += Math.floor(Math.random() * 4) + 1
+//     await candy.save()
+//     return res.status(200).send(false)
+//   })
+// )

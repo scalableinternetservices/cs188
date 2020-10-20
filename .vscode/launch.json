@@ -58,6 +58,26 @@
         "!**/node_modules/**"
       ],
       "restart": true
+    },
+    {
+      "name": "scratchpad.ts",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/ts-node",
+      "stopOnEntry": false,
+      "args": [
+        "-r",
+        "tsconfig-paths/register",
+        "server/src/scratchpad.ts"
+      ],
+      "cwd": "${workspaceRoot}",
+      "sourceMaps": true,
+      "internalConsoleOptions": "openOnSessionStart",
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ],
+      "restart": true
     }
   ]
 }

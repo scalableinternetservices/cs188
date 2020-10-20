@@ -1,0 +1,68 @@
+
+// Types
+
+const a = 1
+const b = 'a string'
+const c = `${b} with interpolation`
+const d = [1, 2, 3, 4, 5]
+const e = undefined
+const f = { num: a, arr: d, str: b, strs: [b, c], e }
+
+// Destructuring
+
+const [d1, d2] = d
+const { num, arr, ...rest } = f
+
+// Boolean arithmetic
+
+const bool1 = Boolean(0)
+const bool2 = bool1 || true
+const boolEmptyStr = Boolean('')
+const strWithFallback = '' || 'default'
+const ternaryStr = b ? b : 'default'
+const truthyEAndF = Boolean(e) && Boolean(f)
+const equalNum = a === 1
+const equalStr = b === 'a string'
+const equalArr = d === [1, 2, 3, 4, 5]
+const equalObj = f === { num: a, arr: d, str: b, strs: [b, c], e }
+const equalUndefined = e === undefined
+const equalNull = e === null
+const equalNullOrUndefined = e == null
+
+// String methods
+
+console.log('charAt', b.charAt(0))
+console.log('substring', b.substring(3))
+
+// Array methods
+
+d.push(f.num)
+let newArray = d.concat(f.arr)
+console.log(newArray.length)
+
+// Object methods
+
+console.log('object keys', Object.keys(f))
+console.log('object values', Object.values(f))
+console.log('JSON stringify', JSON.stringify(f))
+console.log('JSON parse', JSON.parse(JSON.stringify(f)))
+console.log(JSON.parse(JSON.stringify(f)) === f)
+
+// Passing functions as arguments
+
+newArray = newArray.map(function (num) {
+  return num * 2
+})
+newArray = newArray.map(num => num * 2)
+newArray = newArray.filter(num => num != 0)
+
+// Declaring (named) functions
+
+function double(num: number) {
+  return num * 2
+}
+
+const otherDouble = (num: number) => num * 2
+
+newArray = newArray.map(double)
+newArray = newArray.map(otherDouble)

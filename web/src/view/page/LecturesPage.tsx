@@ -11,6 +11,7 @@ import { Page } from './Page'
 
 interface LecturesPageProps extends RouteComponentProps, AppRouteParams {}
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function LecturesPage(props: LecturesPageProps) {
   return (
     <Page>
@@ -45,9 +46,9 @@ export function LecturesPage(props: LecturesPageProps) {
             />
             <Lecture
               day="Tue Oct 8"
-              title="Application server architecture"
-              href="#"
-              description="Building an efficient appserver. Demo: survey of appservers."
+              title="JavaScript"
+              href="/app/assets/lectures/CS188_10_8_20.pdf"
+              description="The JavaScript renaissance. Demo: building a web app."
               requiredReading={[
                 {
                   title: 'TS Deep Dive, JavaScript (** read up to and including "Truthy")',
@@ -61,45 +62,45 @@ export function LecturesPage(props: LecturesPageProps) {
             />
             <Lecture
               day="Thu Oct 13"
-              title="Shipping software in real life"
-              href="#"
-              description="Working with other people & shipping like a pro. Demo: `git` and CI/CD."
+              title="Application server architecture"
+              href="/app/assets/lectures/CS188_10_13_20.pdf"
+              description="Building an efficient appserver. Demo: building a web app."
             />
             <Lecture
               day="Thu Oct 15"
-              title="Vertical and horizontal scaling"
-              href="#"
-              description="Using bigger and more appservers. Demo: scaling the course website."
+              title="API design, GraphQL"
+              href="/app/assets/lectures/CS188_10_15_20.pdf"
+              description="Designing an API. Demo: interactive GraphQL explorer."
             />
             <Lecture
               day="Tue Oct 20"
-              title="High availability, AWS"
-              href="#"
-              description="Making sure your server is always online. Demo: using Amazon Web Services."
+              title="State management & server-side caching"
+              href="/app/assets/lectures/CS188_10_20_20.pdf"
+              description="Managing state and caching on the server. Demo: TypeORM."
             />
             <Lecture
               day="Thu Oct 22"
-              title="Server and client side caching"
-              href="#"
-              description="Caching data on the server and client. Demo: adding caching to the course website."
-            />
-            <Lecture
-              day="Tue Oct 27"
-              title="Load testing"
-              href="#"
-              description="Writing load tests. Demo: load testing the course website."
-            />
-            <Lecture
-              day="Thu Oct 29"
               title="Scaling relational databases"
               href="#"
               description="Using sharding, services, and read-slaves to scale MySQL. Demo: scaling RDS."
             />
             <Lecture
-              day="Tue Nov 3"
+              day="Tue Oct 27"
               title="Beyond relational databases"
               href="#"
               description="Scaling databases without SQL. Demo: survey of NoSQL databases."
+            />
+            <Lecture
+              day="Thu Oct 29"
+              title="Load testing"
+              href="#"
+              description="Writing load tests. Demo: load testing the course website."
+            />
+            <Lecture
+              day="Tue Nov 3"
+              title="High availability, AWS"
+              href="#"
+              description="Making sure your server is always online. Demo: using Amazon Web Services."
             />
             <Lecture
               day="Thu Nov 5"
@@ -109,9 +110,9 @@ export function LecturesPage(props: LecturesPageProps) {
             />
             <Lecture
               day="Tue Nov 10"
-              title="API design, GraphQL"
+              title="Shipping software in real life"
               href="#"
-              description="Designing an API. Demo: course website interactive GraphQL explorer."
+              description="Working with other people & shipping like a pro. Demo: `git` and CI/CD."
             />
             <Lecture
               day="Thu Nov 12"
@@ -173,9 +174,9 @@ function Lecture(props: {
 }) {
   return (
     <TR>
-      <BodyText>
-        <TD>{props.day}</TD>
-        <TD>
+      <TD>{props.day}</TD>
+      <TD>
+        <BodyText>
           <b>{props.href ? <Link href={props.href}>{props.title}</Link> : props.title}</b>
 
           {props.description && (
@@ -198,8 +199,8 @@ function Lecture(props: {
               </ul>
             </>
           )}
-        </TD>
-      </BodyText>
+        </BodyText>
+      </TD>
     </TR>
   )
 }

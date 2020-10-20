@@ -6,7 +6,7 @@ export class UserCandy extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
 
-  @OneToOne(type => User, { eager: true })
+  @OneToOne(() => User, { eager: true })
   @JoinColumn()
   user: User
 
