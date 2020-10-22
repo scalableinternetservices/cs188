@@ -80,57 +80,57 @@ export function LecturesPage(props: LecturesPageProps) {
             />
             <Lecture
               day="Thu Oct 22"
+              title="State management & client-side caching"
+              href="/app/assets/lectures/CS188_10_22_20.pdf"
+              description="Managing state and caching on the client. Demo: Apollo."
+            />
+            <Lecture
+              day="Tue Oct 27"
               title="Scaling relational databases"
               href="#"
               description="Using sharding, services, and read-slaves to scale MySQL. Demo: scaling RDS."
             />
             <Lecture
-              day="Tue Oct 27"
+              day="Thu Oct 29"
               title="Beyond relational databases"
               href="#"
               description="Scaling databases without SQL. Demo: survey of NoSQL databases."
             />
             <Lecture
-              day="Thu Oct 29"
+              day="Tue Nov 3"
               title="Load testing"
               href="#"
               description="Writing load tests. Demo: load testing the course website."
             />
             <Lecture
-              day="Tue Nov 3"
-              title="High availability, AWS"
-              href="#"
-              description="Making sure your server is always online. Demo: using Amazon Web Services."
-            />
-            <Lecture
               day="Thu Nov 5"
-              title="Client-side rendering"
+              title="Monitoring and observability"
               href="#"
-              description="Drawing HTML in the browser. Demo: survey of client-side rendering."
+              description="Measuring how your server is working. Guest lecture: Max Edmands."
             />
             <Lecture
               day="Tue Nov 10"
               title="Shipping software in real life"
               href="#"
-              description="Working with other people & shipping like a pro. Demo: `git` and CI/CD."
+              description="Working with other people & shipping like a pro. Guest lecture: Quinn Slack"
             />
             <Lecture
               day="Thu Nov 12"
-              title="Serverless computing"
+              title="High availability, AWS, Terraform"
+              href="#"
+              description="Making sure your server is always online. Demo: using Amazon Web Services, terraform."
+            />
+            <Lecture
+              day="Tue Nov 17"
+              title="Microservices, serverless computing"
               href="#"
               description="Scaling code without servers. Demo: Firebase, AWS Lambda."
             />
             <Lecture
-              day="Tue Nov 17"
-              title="Monitoring and observability"
-              href="#"
-              description="Measuring how your server is working. Demo: using Honeycomb."
-            />
-            <Lecture
               day="Thu Nov 19"
-              title="Microservices, containers, and Kubernetes"
+              title="Client-side rendering"
               href="#"
-              description="Decomposing and deploying services with Docker and Kubernetes. Demo: inside a Kubernetes cluster."
+              description="Drawing HTML in the browser. Demo: survey of client-side rendering."
             />
             <Lecture
               day="Tue Nov 24"
