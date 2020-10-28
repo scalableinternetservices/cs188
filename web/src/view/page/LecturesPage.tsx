@@ -86,15 +86,15 @@ export function LecturesPage(props: LecturesPageProps) {
             />
             <Lecture
               day="Tue Oct 27"
-              title="Scaling relational databases"
-              href="#"
-              description="Using sharding, services, and read-slaves to scale MySQL. Demo: scaling RDS."
+              title="Relational databases & SQL"
+              href="/app/assets/lectures/CS188_10_27_20.pdf"
+              description="Guest lecture: DC Posch"
             />
             <Lecture
               day="Thu Oct 29"
-              title="Beyond relational databases"
+              title="Scaling relational databases; beyond relational databases"
               href="#"
-              description="Scaling databases without SQL. Demo: survey of NoSQL databases."
+              description="Scaling databases with and without SQL. Demo: survey of databases."
             />
             <Lecture
               day="Tue Nov 3"

@@ -185,7 +185,17 @@ function SprintSchedule() {
               'commit and push code to GitHub',
             ]}
           />
-          <Sprint day="Fri Oct 23" title="Write features" checklist={['implement user stories']} />
+          <Sprint
+            day="Fri Oct 23"
+            title="Write features"
+            href="https://docs.google.com/document/d/1aXqzKLXtzXPNRHMGAUUoGBjy-fT3wIGeAE9TnWAG4Mo/edit?usp=sharing"
+            checklist={[
+              'plan out features with your teammates',
+              'work with teammates to learn the starter code: try adding a database model, GraphQL API/query, React component, etc.',
+              'modify the starter code and start implement your features',
+              'commit and push code to GitHub',
+            ]}
+          />
           <Sprint
             day="Fri Oct 30"
             title="Write features, write a load test"
