@@ -92,9 +92,9 @@ export function LecturesPage(props: LecturesPageProps) {
             />
             <Lecture
               day="Thu Oct 29"
-              title="Scaling relational databases; beyond relational databases"
-              href="#"
-              description="Scaling databases with and without SQL. Demo: survey of databases."
+              title="Scaling relational databases"
+              href="/app/assets/lectures/CS188_10_29_20.pdf"
+              description="Techniques for scaling relational databases."
             />
             <Lecture
               day="Tue Nov 3"
