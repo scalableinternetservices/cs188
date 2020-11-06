@@ -99,13 +99,13 @@ export function LecturesPage(props: LecturesPageProps) {
             <Lecture
               day="Tue Nov 3"
               title="Load testing"
-              href="#"
+              href="/app/assets/lectures/CS188_11_3_20.pdf"
               description="Writing load tests. Demo: load testing the course website."
             />
             <Lecture
               day="Thu Nov 5"
               title="Monitoring and observability"
-              href="#"
+              href="/app/assets/lectures/CS188_11_5_20.pdf"
               description="Measuring how your server is working. Guest lecture: Max Edmands."
             />
             <Lecture

@@ -204,13 +204,14 @@ function SprintSchedule() {
           />
           <Sprint
             day="Fri Nov 6"
-            title="Write features, write a load test"
+            title="Write features, write a load test, setup honeycomb"
+            href="https://docs.google.com/document/d/12iT5Vk24B1I9ZVMBCYAceW4tDe8dSWYX478YqJRRAWY/edit?usp=sharing"
             checklist={[
+              'finish implementing features',
               'write a load test user script',
               'setup honeycomb project',
               'run load test against local dev server',
-              'verify results in honeycomb',
-              'implement more user stories',
+              'explore data in honeycomb',
             ]}
           />
           <Sprint
