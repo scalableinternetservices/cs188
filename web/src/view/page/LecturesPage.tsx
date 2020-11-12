@@ -116,9 +116,9 @@ export function LecturesPage(props: LecturesPageProps) {
             />
             <Lecture
               day="Thu Nov 12"
-              title="High availability, AWS, Terraform"
-              href="#"
-              description="Making sure your server is always online. Demo: using Amazon Web Services, terraform."
+              title="Debugging performance problems"
+              href="/app/assets/lectures/CS188_11_12_20.pdf"
+              description="Demo: investigating the course website."
             />
             <Lecture
               day="Tue Nov 17"
