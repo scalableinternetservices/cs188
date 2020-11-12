@@ -111,7 +111,7 @@ export function LecturesPage(props: LecturesPageProps) {
             <Lecture
               day="Tue Nov 10"
               title="Shipping software in real life"
-              href="#"
+              href="/app/assets/lectures/CS188_11_10_20.pdf"
               description="Working with other people & shipping like a pro. Guest lecture: Quinn Slack"
             />
             <Lecture
