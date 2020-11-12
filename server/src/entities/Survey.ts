@@ -12,22 +12,10 @@ export class Survey extends BaseEntity {
   @Column({ nullable: true })
   currQuestion: number
 
-  @OneToMany(() => SurveyQuestion, question => question.survey, { eager: true })
+  @OneToMany(() => SurveyQuestion, question => question.survey)
   questions: SurveyQuestion[]
 
   get isStarted() {
     return this.currQuestion != null
-  }
-
-  get isCompleted() {
-    return this.isStarted && this.currQuestion >= this.questions.length
-  }
-
-  get currentQuestion() {
-    if (!this.isStarted || this.isCompleted) {
-      return null
-    }
-
-    return this.questions.sort((a, b) => a.id - b.id)[this.currQuestion]
   }
 }

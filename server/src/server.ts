@@ -1,14 +1,15 @@
 require('honeycomb-beeline')({
   writeKey: process.env.HONEYCOMB_KEY || 'd29d5f5ec24178320dae437383480737',
-  dataset: process.env.APP_NAME || 'cs188',
+  dataset: process.env.APP_NAME || 'cs188-local',
   serviceName: process.env.APPSERVER_TAG || 'local',
   enabledInstrumentations: ['express', 'mysql2', 'react-dom/server'],
-  sampleRate: 10,
+  sampleRate: 100,
 })
 
 import assert from 'assert'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import DataLoader from 'dataloader'
 import { json, raw, RequestHandler, static as expressStatic } from 'express'
 import { getOperationAST, parse as parseGraphql, specifiedRules, subscribe as gqlSubscribe, validate } from 'graphql'
 import { GraphQLServer } from 'graphql-yoga'
@@ -21,6 +22,8 @@ import { Config } from './config'
 import { migrate } from './db/migrate'
 import { initORM } from './db/sql'
 import { Session } from './entities/Session'
+import { Survey } from './entities/Survey'
+import { SurveyQuestion } from './entities/SurveyQuestion'
 import { User } from './entities/User'
 import { getSchema, graphqlRoot, pubsub } from './graphql/api'
 import { ConnectionManager } from './graphql/ConnectionManager'
@@ -28,10 +31,36 @@ import { UserType } from './graphql/schema.types'
 import { expressLambdaProxy } from './lambda/handler'
 import { renderApp } from './render'
 
+const createSurveyLoader = () =>
+  new DataLoader<number, Survey>(async surveyIds => {
+    const surveys = await Survey.findByIds(surveyIds as number[])
+    const surveyIdToSurvey: Record<number, Survey> = {}
+    surveys.forEach(s => {
+      surveyIdToSurvey[s.id] = s
+    })
+    return surveyIds.map(sid => surveyIdToSurvey[sid])
+  })
+
+const createSurveyQuestionLoader = () =>
+  new DataLoader<number, SurveyQuestion>(async surveyIds => {
+    const surveys = await SurveyQuestion.findByIds(surveyIds as number[])
+    const surveyIdToSurvey: Record<number, SurveyQuestion> = {}
+    surveys.forEach(s => {
+      surveyIdToSurvey[s.id] = s
+    })
+    return surveyIds.map(sid => surveyIdToSurvey[sid])
+  })
+
 const server = new GraphQLServer({
   typeDefs: getSchema(),
   resolvers: graphqlRoot as any,
-  context: ctx => ({ ...ctx, pubsub, user: (ctx.request as any)?.user || null }),
+  context: ctx => ({
+    ...ctx,
+    pubsub,
+    user: (ctx.request as any)?.user || null,
+    surveyLoader: createSurveyLoader(),
+    surveyQuestionLoader: createSurveyQuestionLoader(),
+  }),
 })
 
 server.express.use(cookieParser())
@@ -49,7 +78,7 @@ server.express.get('/', (req, res) => {
 
 server.express.get('/app/*', (req, res) => {
   console.log('GET /app')
-  renderApp(req, res)
+  renderApp(req, res, server.executableSchema)
 })
 
 server.express.get(

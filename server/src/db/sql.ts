@@ -20,10 +20,10 @@ export async function initORM() {
     type: 'mysql',
     username: process.env.MYSQL_USER || 'root',
     synchronize: true,
-    logging: false,
+    logging: true,
     entities: [User, Session, Survey, SurveyQuestion, SurveyAnswer, UserCandy],
     extra: {
-      connectionLimit: 5,
+      connectionLimit: 1,
     },
   })
 }

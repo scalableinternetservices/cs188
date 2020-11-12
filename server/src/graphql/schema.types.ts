@@ -78,6 +78,7 @@ export interface Survey {
   name: Scalars['String']
   isStarted: Scalars['Boolean']
   isCompleted: Scalars['Boolean']
+  currQuestion?: Maybe<Scalars['Int']>
   currentQuestion?: Maybe<SurveyQuestion>
   questions: Array<Maybe<SurveyQuestion>>
 }
@@ -292,6 +293,7 @@ export type SurveyResolvers<
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   isStarted?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
   isCompleted?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
+  currQuestion?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
   currentQuestion?: Resolver<Maybe<ResolversTypes['SurveyQuestion']>, ParentType, ContextType>
   questions?: Resolver<Array<Maybe<ResolversTypes['SurveyQuestion']>>, ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType>

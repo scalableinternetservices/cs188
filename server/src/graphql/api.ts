@@ -1,3 +1,4 @@
+import DataLoader from 'dataloader'
 import { readFileSync } from 'fs'
 import { PubSub } from 'graphql-yoga'
 import path from 'path'
@@ -22,13 +23,15 @@ interface Context {
   request: Request
   response: Response
   pubsub: PubSub
+  surveyLoader: DataLoader<number, Survey>
+  surveyQuestionLoader: DataLoader<number, SurveyQuestion>
 }
 
 export const graphqlRoot: Resolvers<Context> = {
   Query: {
     self: (_, args, ctx) => ctx.user,
-    survey: async (_, { surveyId }) => (await Survey.findOne({ where: { id: surveyId } })) || null,
-    surveys: () => Survey.find(),
+    survey: async (_, { surveyId }) => ((await Survey.findOne({ where: { id: surveyId } })) || null) as any,
+    surveys: () => Survey.find() as any,
     candies: async () => {
       const candies = await UserCandy.find()
       if (candies.length !== 0) {
@@ -55,7 +58,7 @@ export const graphqlRoot: Resolvers<Context> = {
       surveyAnswer.answer = answer
       await surveyAnswer.save()
 
-      question.survey.currentQuestion?.answers.push(surveyAnswer)
+      // question.survey.currentQuestion?.answers.push(surveyAnswer)
       ctx.pubsub.publish('SURVEY_UPDATE_' + question.survey.id, question.survey)
 
       return true
@@ -66,7 +69,7 @@ export const graphqlRoot: Resolvers<Context> = {
       survey.currQuestion = survey.currQuestion == null ? 0 : survey.currQuestion + 1
       await survey.save()
       ctx.pubsub.publish('SURVEY_UPDATE_' + surveyId, survey)
-      return survey
+      return survey as any
     },
     throwCandy: async (_, { email }, ctx) => {
       const candy = await getRepository(UserCandy)
@@ -92,6 +95,44 @@ export const graphqlRoot: Resolvers<Context> = {
     candyUpdates: {
       subscribe: (_, arg, ctx) => ctx.pubsub.asyncIterator('CANDY_UPDATE'),
       resolve: (payload: any) => payload,
+    },
+  },
+  Survey: {
+    currentQuestion: async (self, _, ctx) => {
+      if (self.currQuestion == null) {
+        return null
+      }
+
+      const questions = await getRepository(SurveyQuestion)
+        .createQueryBuilder('survey_question')
+        .where('surveyId = :id', { id: self.id })
+        .orderBy('id', 'ASC')
+        .getMany()
+
+      return questions[self.currQuestion] as any
+    },
+    isCompleted: async (self, _, ctx) => {
+      if (self.currQuestion == null) {
+        return false
+      }
+
+      const questionCount = await getRepository(SurveyQuestion)
+        .createQueryBuilder('survey_question')
+        .where('surveyId = :id', { id: self.id })
+        .getCount()
+      return self.currQuestion >= questionCount
+    },
+    questions: async (self, _, ctx) => {
+      return SurveyQuestion.find({ where: { surveyId: self.id } }) as any
+    },
+  },
+  SurveyQuestion: {
+    answers: async (self, _, ctx) => {
+      return SurveyAnswer.find({ where: { questionId: self.id } }) as any
+    },
+    survey: async (self, _, ctx) => {
+      return Survey.findOne({ where: { id: (self as any).surveyId } }) as any
+      // return ctx.surveyLoader.load((self as any).surveyId) as any
     },
   },
 }

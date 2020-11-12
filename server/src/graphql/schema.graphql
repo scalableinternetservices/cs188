@@ -66,6 +66,9 @@ type Survey {
   # True if the survey has completed.
   isCompleted: Boolean!
 
+  # The current question id
+  currQuestion: Int
+
   # The current survey question, or null if the survey hasn't started.
   currentQuestion: SurveyQuestion
 

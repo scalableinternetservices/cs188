@@ -9,6 +9,9 @@ export class SurveyAnswer extends BaseEntity {
   @Column('text')
   answer: string
 
+  @Column()
+  questionId: number
+
   @ManyToOne(() => SurveyQuestion, question => question.answers)
   question: SurveyQuestion
 }

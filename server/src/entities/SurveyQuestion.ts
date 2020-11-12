@@ -13,8 +13,11 @@ export class SurveyQuestion extends BaseEntity {
   @Column('simple-array', { nullable: true })
   choices: string[]
 
-  @OneToMany(() => SurveyAnswer, answer => answer.question, { eager: true })
+  @OneToMany(() => SurveyAnswer, answer => answer.question)
   answers: SurveyAnswer[]
+
+  @Column()
+  surveyId: number
 
   @ManyToOne(() => Survey, survey => survey.questions)
   survey: Survey

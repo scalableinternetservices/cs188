@@ -1,25 +1,28 @@
 import http from 'k6/http'
-// import { sleep } from 'k6'
 import { Counter, Rate } from 'k6/metrics'
 
 export const options = {
   scenarios: {
     example_scenario: {
-      // name of the executor to use
-      executor: 'ramping-arrival-rate',
-      // common scenario configuration
-      startRate: '50',
-      timeUnit: '1s',
-      // executor-specific configuration
-      preAllocatedVUs: 50,
-      maxVUs: 100,
+      executor: 'ramping-vus',
+      startVUs: 0,
       stages: [
-        { target: 200, duration: '30s' },
-        { target: 0, duration: '30s' },
+        { duration: '60s', target: 5000 },
+        { duration: '60s', target: 0 },
       ],
+      gracefulRampDown: '0s',
     },
   },
 }
+// export const options = {
+//   scenarios: {
+//     example_scenario: {
+//       executor: 'constant-vus',
+//       vus: 1000,
+//       duration: '30s',
+//     },
+//   },
+// }
 
 export default function () {
   // recordRates(
@@ -32,9 +35,11 @@ export default function () {
       },
     }
   )
-  // )
-  sleep(1)
-  http.get('http://localhost:3000')
+
+  recordRates(
+    http.get('http://localhost:3000/app/index', { cookies: { authToken: '9f10c46a-98ff-4351-86bb-74a601eb5ac2' } })
+  )
+  sleep(Math.random() * 3)
 }
 
 const count200 = new Counter('status_code_2xx')
