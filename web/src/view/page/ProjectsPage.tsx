@@ -65,7 +65,6 @@ function ProjectRequirements() {
           <li>
             Must use at least 2 <code>JOIN</code> relations
           </li>
-          <li>Must use at least 1 "background" process running regardless of user activity</li>
         </ul>
       </BodyText>
     </>
@@ -217,7 +216,7 @@ function SprintSchedule() {
           <Sprint
             day="Fri Nov 13"
             title="Start working on final project paper"
-            href="https://docs.google.com/document/d/1Gd4tkzjsB5ulqvVF_1Bt49BTwM7RCKw8XGVppky6LCo/edit#"
+            href="https://docs.google.com/document/d/1Gd4tkzjsB5ulqvVF_1Bt49BTwM7RCKw8XGVppky6LCo/edit?usp=sharing"
             checklist={[
               'run load tests against local dev server',
               'explore data in honeycomb',

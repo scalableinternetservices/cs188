@@ -122,15 +122,15 @@ export function LecturesPage(props: LecturesPageProps) {
             />
             <Lecture
               day="Tue Nov 17"
-              title="Microservices, serverless computing"
-              href="#"
-              description="Scaling code without servers. Demo: Firebase, AWS Lambda."
+              title="Fetching & publishing"
+              href="/app/assets/lectures/CS188_11_17_20.pdf"
+              description="Updating your app with new data in real time. Demo: polling, GraphQL subscriptions."
             />
             <Lecture
               day="Thu Nov 19"
-              title="Client-side rendering"
+              title="High availability; serverless computing; AWS"
               href="#"
-              description="Drawing HTML in the browser. Demo: survey of client-side rendering."
+              description="Scaling code with and without servers. Demo: Firebase, AWS Lambda."
             />
             <Lecture
               day="Tue Nov 24"
@@ -141,9 +141,9 @@ export function LecturesPage(props: LecturesPageProps) {
             <Lecture day="Thu Nov 26" title="Thanksgiving (no lecture)" />
             <Lecture
               day="Tue Dec 1"
-              title="Fetching data, publishing data"
+              title="Client-side rendering"
+              description="Drawing HTML in the browser. Demo: survey of client-side rendering."
               href="#"
-              description="Updating your app with new data in real time. Demo: polling, GraphQL subscriptions."
             />
             <Lecture
               day="Thu Dec 3"
