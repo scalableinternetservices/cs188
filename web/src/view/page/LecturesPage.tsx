@@ -128,9 +128,9 @@ export function LecturesPage(props: LecturesPageProps) {
             />
             <Lecture
               day="Thu Nov 19"
-              title="High availability; serverless computing; AWS"
-              href="#"
-              description="Scaling code with and without servers. Demo: Firebase, AWS Lambda."
+              title="High availability; serverless computing; AWS; terraform"
+              href="/app/assets/lectures/CS188_11_19_20.pdf"
+              description="Scaling code with and without servers. Demo: terraform, AWS."
             />
             <Lecture
               day="Tue Nov 24"
