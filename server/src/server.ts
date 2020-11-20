@@ -19,7 +19,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { checkEqual, Unpromise } from '../../common/src/util'
 import { Config } from './config'
 import { migrate } from './db/migrate'
-import { initORM } from './db/sql'
+import { getSQLConnection, initORM } from './db/sql'
 import { Session } from './entities/Session'
 import { User } from './entities/User'
 import { getSchema, graphqlRoot, pubsub } from './graphql/api'
@@ -45,6 +45,12 @@ const asyncRoute = (fn: RequestHandler) => (...args: Parameters<RequestHandler>)
 server.express.get('/', (req, res) => {
   console.log('GET /')
   res.redirect('/app')
+})
+
+server.express.get('/users', async (req, res) => {
+  const sql = await getSQLConnection()
+  const result = await sql.query('SELECT * from user where id = ?', [1])
+  console.log(result)
 })
 
 server.express.get('/app/*', (req, res) => {
