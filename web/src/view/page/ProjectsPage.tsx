@@ -226,8 +226,14 @@ function SprintSchedule() {
           />
           <Sprint
             day="Fri Nov 20"
-            title="Deploy code on AWS, try different scaling configurations"
-            checklist={['run terraform', 'run load test against AWS resources', 'delete terraform resources']}
+            href="https://docs.google.com/document/d/1_8Yi_tO0d2zuSMOPzd3hgUQNjpjGav_PmU5H6JqxSq0/edit?usp=sharing"
+            title="Continue working on final project paper"
+            checklist={[
+              'run load tests against local dev server',
+              'explore data in honeycomb',
+              'collect results for final paper',
+              'start implementing performance improvements',
+            ]}
           />
           <Sprint day="Fri Nov 27" title="Thanksgiving (no lab)" />
           <Sprint
