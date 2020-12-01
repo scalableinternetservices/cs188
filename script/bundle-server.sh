@@ -20,5 +20,5 @@ cp ./server/src/graphql/schema.graphql ./server/bin/server/src/graphql/schema.gr
 npm --prefix ./server/bin ci --production
 npm --prefix ./server/bin/server ci --production
 
-# cd server/bin
-# zip -r -q -X ../bundle.zip ./*
+cd server/bin
+zip -r -q -X ../bundle.zip ./*

@@ -44,6 +44,39 @@ function ProjectOverview() {
         to the <Link to={getPlaygroundPath()}>playground</Link>. The website source code is located{' '}
         <Link href="https://github.com/scalableinternetservices/cs188">here</Link>.
       </BodyText>
+      <Spacer $h4 />
+      <BodyText>
+        The final paper is due <strong>December 9th at 11:59pm</strong>. Email a PDF of your paper to the instructor and
+        TAs (one submission per team). Instructions for the final paper can be found{' '}
+        <Link href="https://docs.google.com/document/d/1rypUN6v7LrsXyIJzj1lhiZjNQj7O6rHISyfek_zgB00/edit">here</Link>.
+      </BodyText>
+      <Spacer $h4 />
+      <BodyText>
+        Here are some sample papers from the past:
+        <Spacer $h4 />
+        <ul className="pl4">
+          <li>
+            <Link href="https://github.com/scalableinternetservices/scalableinternetservices.github.io/blob/master/sample_projects/InstaWaves.pdf">
+              InstaWaves
+            </Link>
+          </li>
+          <li>
+            <Link href="https://github.com/scalableinternetservices/scalableinternetservices.github.io/blob/master/sample_projects/PaperSphere.pdf">
+              PaperSphere
+            </Link>
+          </li>
+          <li>
+            <Link href="https://github.com/scalableinternetservices/scalableinternetservices.github.io/blob/master/sample_projects/foodies.pdf">
+              Foodies
+            </Link>
+          </li>
+          <li>
+            <Link href="https://github.com/scalableinternetservices/scalableinternetservices.github.io/blob/master/sample_projects/noitcua.pdf">
+              NOITCUA
+            </Link>
+          </li>
+        </ul>
+      </BodyText>
     </>
   )
 }
