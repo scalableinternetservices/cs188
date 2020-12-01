@@ -135,7 +135,7 @@ export function LecturesPage(props: LecturesPageProps) {
             <Lecture
               day="Tue Nov 24"
               title="Intelligent systems"
-              href="#"
+              href="/app/assets/lectures/CS188_11_24_20.pdf"
               description="Using ML in your internet service. Guest lecture: Andrew Mutz."
             />
             <Lecture day="Thu Nov 26" title="Thanksgiving (no lecture)" />
