@@ -11,7 +11,7 @@ function isProd() {
   return process.env.NODE_ENV === 'production'
 }
 
-function isServiceEnabled(svc: AppService) {
+export function isServiceEnabled(svc: AppService) {
   return services.includes(svc)
 }
 

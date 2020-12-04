@@ -142,21 +142,22 @@ export function LecturesPage(props: LecturesPageProps) {
             <Lecture
               day="Tue Dec 1"
               title="Course review"
-              description="Reviewing the scaling toolset. Demo: horizontal and vertical scaling on AWS."
               href="/app/assets/lectures/CS188_12_1_20.pdf"
+              description="Reviewing the scaling toolset. Demo: horizontal and vertical scaling on AWS."
             />
             <Lecture
-              day="Thu Dec 3"
-              title="Bonus topic: high performance networking"
-              href="#"
-              description="Using HTTP/2, CDNs, and edge computing. Demo: Next.js, Netlify."
+              day="Tue Dec 3"
+              title="NoSQL"
+              href="/app/assets/lectures/CS188_12_3_20.pdf"
+              description="Scaling databases without SQL"
             />
             <Lecture
-              day="Tue Dec 8"
-              title="Bonus topic: NoSQL, no JavaScript"
+              day="Thu Dec 8"
+              title="High performance networking, no JavaScript"
               href="#"
-              description="Scaling databases without SQL; coding in the browser without JavaScript"
+              description="Using HTTP/2, CDNs, and edge computing; coding in the browser without JavaScript. Demo: Next.js, Netlify."
             />
+
             <Lecture day="Thu Dec 10" title="Project Presentations" />
           </tbody>
         </Table>

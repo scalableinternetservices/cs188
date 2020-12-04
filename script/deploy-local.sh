@@ -38,10 +38,10 @@ echo "Updating app-web"
 # ./script/deploy-ecs.sh cs188-app-background "local"
 
 echo "Updating lambda"
-aws lambda update-function-code \
-  --no-cli-pager \
-  --region us-west-2 \
-  --function-name cs188 \
-  --zip-file fileb://./server/bundle.zip
+# aws lambda update-function-code \
+#   --no-cli-pager \
+#   --region us-west-2 \
+#   --function-name cs188 \
+#   --zip-file fileb://./server/bundle.zip
 
 echo "DONE"
