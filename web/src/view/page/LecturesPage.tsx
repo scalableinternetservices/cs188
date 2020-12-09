@@ -153,11 +153,10 @@ export function LecturesPage(props: LecturesPageProps) {
             />
             <Lecture
               day="Thu Dec 8"
-              title="High performance networking, no JavaScript"
-              href="#"
-              description="Using HTTP/2, CDNs, and edge computing; coding in the browser without JavaScript. Demo: Next.js, Netlify."
+              title="High performance networking, CDNs"
+              href="/app/assets/lectures/CS188_12_8_20.pdf"
+              description="Using HTTP/2, CDNs. Course conclusion."
             />
-
             <Lecture day="Thu Dec 10" title="Project Presentations" />
           </tbody>
         </Table>
